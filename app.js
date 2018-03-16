@@ -7,7 +7,7 @@ const mysql = require('mysql');
 
 const app = express();
 
-const SITE_PORT = 80;
+const SITE_PORT = 8081;
 const TEMPLATE_FOLDER = 'templates'
 
 var sql;
@@ -187,29 +187,28 @@ app.get('/getteamdata', function(req, res) {
 		if (match_number != null && match_number !== "") {
 				queryList = " WHERE m.match_number=" + sql.escape(match_number);
 		}
-		sql.query('SELECT team_number FROM matches m' + queryList + ' ORDER BY match_number, team_number', function(err, result1, fields) {
-				if (err) throw err;
+		sql.query('SELECT team_number FROM matches m' + queryList + ' ORDER BY match_number, team_number', function(err, result_team_numbers, fields) {
+	    		if (err) throw err;
 				var data = {};
 				var counter = 0;
 
-				if (result1.length == 0) {
+				if (result_team_numbers.length == 0) {
 						res.send(data);
 						return;
 				}
 
 				var query_recursive = function(err, result2, fields) {
-						var element = result1[counter];
-
-						console.log(element.team_number);
+						var element = result_team_numbers[counter];
+						
 						data[element.team_number] = result2;
-						if (result1[counter + 1] === undefined) {
+						if (result_team_numbers[counter + 1] === undefined) {
 								res.send(data);
 								return;
 						}
 						counter++;
-						sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result1[counter].team_number) + ' ORDER BY match_number', query_recursive);
+					    sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result_team_numbers[counter].team_number) + ' ORDER BY match_number', query_recursive);
 				}
-				sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result1[0].team_number), query_recursive);
+				sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result_team_numbers[0].team_number), query_recursive);
 
 		});
 });
