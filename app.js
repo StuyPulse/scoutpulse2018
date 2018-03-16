@@ -207,7 +207,7 @@ app.get('/getteamdata', function(req, res) {
 								return;
 						}
 						counter++;
-						sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result1[counter].team_number), query_recursive);
+						sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result1[counter].team_number) + ' ORDER BY match_number', query_recursive);
 				}
 				sql.query('SELECT * FROM matches m WHERE m.team_number=' + sql.escape(result1[0].team_number), query_recursive);
 
