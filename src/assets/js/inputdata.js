@@ -15,6 +15,8 @@ class MyInputData extends Polymer.Element {
                 this.$.notif_toast_normal.refit();
                 this.$.notif_toast_normal.open();
             }
+
+    		//runs when you hit the "submit" on the first page
     		load_data() {
     		    console.log(this.$.match_number.value);
     		    var team = this.$.team.value;
@@ -44,20 +46,109 @@ class MyInputData extends Polymer.Element {
                         }
 
                         data = data[0]; // object is stored in array
-                        this.$.climb.selected = data.climb;
-                        this.$.match_type.selected = data.match_type;
-                        this.$.match_number.value = data.match_number;
-                        this.$.methodScoring.selected = data.methodScoring;
-                        this.$.methodAcquiring.selected = data.methodAcquiring;
-                        this.$.climbMech.selected = data.climbMech;
-                        this.$.mobility.selected = data.mobility;
-                        this.$.autonSwitchCubes.selected = data.autonSwitchCubes;
-                        this.$.autonScaleCubes.selected = data.autonScaleCubes;
-                        this.$.allianceSwitchCubes.selected = data.allianceSwitchCubes;
-                        this.$.opposingSwitchCubes.selected = data.opposingSwitchCubes;
-                        this.$.teleopScaleCubes.selected = data.teleopScaleCubes;
-                        this.$.exchange.selected = data.exchange;
-                        this.$.assistedOption.selected = data.assistedOption;
+                        if (data.mobility == "YES") {
+                            this.$.mobility.selected = 0;
+                        } else if (data.mobility == "NO") {
+                            this.$.mobility.selected = 1;
+                        }
+
+                        if (data.climb == "YES") {
+                            this.$.climb.selected = 0;
+                        } else if (data.climb == "NO") {
+                            this.$.climb.selected = 1;
+                        }
+                        if (data.match_type == "Practice") {
+                            this.$.match_type.selected = 0;
+                        } else if (data.match_type == "Qualifier") {
+                            this.$.match_type.selected = 1;
+                        } else if (data.match_type == "Quarterfinals") {
+                            this.$.match_type.selected = 2;
+                        } else if (data.match_type == "Semifinals") {
+                            this.$.match_type.selected = 3;
+                        } else if (data.match_type == "Finals") {
+                            this.$.match_type.selected = 4;
+                        }
+                        
+                        if (data.methodScoring == "Place") {
+                            this.$.methodScoring.selected = 0;
+                        } else if (data.methodScoring == "Shoot Cube") {
+                            this.$.methodScoring.selected = 1;
+                        } else {
+                            this.$.methodScoring.selected = 2;
+                            this.$.loadable_text0.style.display = "";
+                            this.$.methodScoring.value = data.methodScoring;
+                        }
+                        
+                        if (data.methodAcquiring == "Floor") {
+                            this.$.methodAcquiring.selected = 0;
+                        } else if (data.methodAcquiring == "Portal") {
+                            this.$.methodAcquiring.selected = 1;
+                        } else {
+                            this.$.methodAcquiring.selected = 2;
+                            this.$.loadable_text1.style.display = "";
+                            this.$.methodAcquiring.value = data.methodAcquiring;
+                        }
+
+                        if (data.climbMech == "Rung") {
+                            this.$.climbMech.selected = 0;
+                        } else if (data.climbMech == "Ramp") {
+                            this.$.climbMech.selected = 1;
+                        } else if (data.climbMech == "Rung Expansion") {
+                            this.$.climbMech.selected = 2;
+                        } else {
+                            this.$.climbMech.selected = 3;
+                            this.$.loadable_text2.style.display = "";
+                            this.$.climbMech.value = data.climbMech;
+                        }
+
+                        if (data.assistedOption == "NONE") {
+                            this.$.assistedOption.selected = 0;
+                        } else {
+                            this.$.assistedOption.selected = data.assistedOption;
+                        }
+
+                        if (data.autonSwitchCubes >= 7) {
+                            this.$.autonSwitchCubes.selected = 7;
+                            this.$.autonSwitchCubes.value = data.autonSwitchCubes;
+                        } else {
+                            this.$.autonSwitchCubes.selected = this.$.autonSwitchCubes.value;
+                        }
+
+                        if (data.autonScaleCubes >= 7) {
+                            this.$.autonScaleCubes.selected = 7;
+                            this.$.autonScaleCubes7.value = data.autonScaleCubes;
+                        } else {
+                            this.$.autonScaleCubes.selected = this.$.autonScaleCubes.value;
+                        }
+                        
+                        if (data.allianceSwitchCubes >= 7) {
+                            this.$.allianceSwitchCubes.selected = 7;
+                            this.$.allianceSwitchCubes7.value = data.allianceSwitcgCubes;
+                        } else {
+                            this.$.allianceSwitchCubes.selected = this.$.allianceSwitchCubes.value;
+                        }
+
+                        if (data.opposingSwitchCubes >= 7) {
+                            this.$.opposingSwitchCubes.selected = 7;
+                            this.$.opposingSwitchCubes7.value = data.opposingSwitchCubes;
+                        } else {
+                            this.$.opposingSwitchCubes.selected = this.$.opposingSwitchCubes.value;
+                        }
+                        
+                        if (data.teleopScaleCubes >= 7) {
+                            this.$.teleopScaleCubes.selected = 7;
+                            this.$.teleopScaleCubes7.value = data.teleopScaleCubes;
+                        } else {
+                            this.$.teleopScaleCubes.selected = this.$.teleopScaleCubes.value;
+                        }
+
+                        if (data.exchange >= 7) {
+                            this.$.exchange.selected = 7;
+                            this.$.exchange7.value = data.exchange;
+                        } else {
+                            this.$.exchange.selected = this.$.exchange.value;
+                        }
+
                     },
                     error: function(data) {
                         this.set_notif_error_message("ERROR: Did not load data, "
