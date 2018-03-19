@@ -74,7 +74,6 @@ function sql_connect(sql_password) {
                 throw err;
             }
         });
-
         // Team data table
         //sql.query('CREATE TABLE IF NOT EXISTS teams (team_number SMALLINT PRIMARY KEY)', function(err, result) {if (err) throw err;});
     });
