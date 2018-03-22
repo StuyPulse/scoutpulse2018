@@ -88,33 +88,6 @@
                 <paper-button toggles raised class="custom red"> Finals </paper-button>
             </paper-button-group>
             <br>
-            <iron-label for="methodScoring">
-                Method of Scoring
-            </iron-label>
-            <br>
-            <paper-button-group id="methodScoring" selected = "methodScoring">
-                    <paper-button toggles raised class="custom red"> Place </paper-button>
-                    <paper-button toggles raised class="custom red"> Shoot Cube </paper-button>
-                    <paper-button toggles raised on-click="load_text_method_scoring" id="method_scoring_button" class="custom red"> Other </paper-button>
-                <div id="loadable_text0" style="display:none">
-                    <paper-input always-float-label id="methodScoringOther"> </paper-input>
-                </div>
-            </paper-button-group>
-            <br>
-            <br>
-            <iron-label for="methodAcquiring">
-            Method of Acquiring
-            </iron-label>
-            <br>
-            <paper-button-group id="methodAcquiring" selected = "methodAcquiring">
-                    <paper-button toggles raised class="custom red"> Floor </paper-button>
-                    <paper-button toggles raised class="custom red"> Portal </paper-button>
-                <paper-button toggles raised on-click="load_text_method_acquiring" id="method_acquiring_button" class="custom red"> Other </paper-button>
-            <div id="loadable_text1" style="display:none">
-                <paper-input always-float-label id="methodAcquiringOther"> </paper-input>
-            </div>
-            </paper-button-group>
-            <br>
             <br>
             <iron-label for="climbMech">
             Climb Mechanism
